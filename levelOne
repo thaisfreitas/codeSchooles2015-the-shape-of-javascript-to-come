@@ -1,3 +1,4 @@
+//section 2
 function getUsersAvatars(userNames, cb){
   let url = "/userAvatars/";
 
@@ -6,4 +7,14 @@ function getUsersAvatars(userNames, cb){
       _displayAvatar(userNames[index], avatarUrl);
     });
   }
+}
+
+//section 3
+function validateMessage(author, message){
+  const MAX_MESSAGE_LENGTH = 140;
+  if(message.length > MAX_MESSAGE_LENGTH){
+    message = _trimMessage(message);
+  }
+
+  _postMessage(author, message);
 }
