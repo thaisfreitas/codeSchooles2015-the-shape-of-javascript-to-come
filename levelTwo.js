@@ -21,3 +21,58 @@ function loadProfiles(userNames = [], {profilesClass,reverseSort } = {}) {
 
   _loadProfilesToSideBar(userNames, profilesClass);
 }
+
+
+//level 2 section 2 - refactoring-to-rest-params
+
+function appendUserNames( ...userNames ){
+
+  let userNameDivs  = "";
+  let USER_CLASS    = ".forum-user";
+
+  for(let i in userNames){
+    let name = userNames[i];
+    if(name !== "admin"){
+      userNameDivs += "<div class='" + USER_CLASS + "'>" + name + "</div>";
+    }
+  }
+
+  return userNameDivs;
+}
+
+getActiveUsers(15, function(data){
+  let userNameDivs = appendUserNames( ...data.userNames );
+  appendToSidebar(".side-bar", userNameDivs);
+});
+
+function getActiveUsers(topicId, cb){
+  _fetchTopicInfo("/topics/" + id, function(data){
+    cb(data);
+  });
+}
+
+//arrow-functions-in-action
+//simple function
+let printName = function(value){
+  console.log( value );
+}
+//arrow function counterpart
+let printName = (value) => {
+  console.log( value );
+}
+
+//arrow-functions-in-action
+function ActiveUsersComponent(target, topicId){
+  this.targetElement = target;
+  this.topicId       = topicId;
+}
+
+ActiveUsersComponent.prototype.render = function(){
+  getActiveUsers(this.topicId, (data) => {
+    let userNameDivs = appendUserNames(...data.userNames);
+    appendToSidebar(this.targetElement, userNameDivs);
+  });
+};
+// Create new component below
+let component = new ActiveUsersComponent(".active-users", 17);
+component.render();
