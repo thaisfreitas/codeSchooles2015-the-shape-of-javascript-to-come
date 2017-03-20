@@ -1,0 +1,62 @@
+//level 3 - section 1
+let name = "Brook";
+let totalReplies = 249;
+let avatar = "/users/avatars/brook-user-1.jpg";
+
+let user = {name, totalReplies, avatar};
+
+addUserToSidebar(user);
+
+//level 3 - section 1
+function buildTopicElement(topic){
+  let title = "<h2>" + topic.title + "</h2>";
+  let author = "<small>" + topic.author + "</small>";
+  let body = "<p>" + topic.body + "</p>";
+
+  return { title, author, body };
+}
+
+//level 3 - section 1 - object-destructuring
+let {first, last, fullName} = buildUser("Tyler", "Williams");
+
+let title  = "The New Object Syntax - Good or Bad?";
+let author = fullName;
+let body = "What do you all think of the new syntax? I like it!";
+
+let topic = { title, author, body };
+
+let element = buildTopicElement(topic);
+
+addTopicToPage(element);
+
+//level 3 - section 1 - method-initializer-shorthand
+
+function buildMetadata(object){
+  let id = parseInt(object.id);
+  let lastUpdatedAt = object.updatedAt || object.createdAt;
+  let hashCode = _buildHashCode(object);
+
+  const SECURE_HASH_CODE_LENGTH = 32;
+
+  return {
+    id,
+    lastUpdatedAt,
+    hashCode,
+    isSecureHash() {
+      return hashCode >= SECURE_HASH_CODE_LENGTH;
+    }
+  };
+}
+
+//level 3 - section 1 - string-interpolation
+let replyCount = 21;
+let message = `This topic has a total of ${replyCount} replies`;
+
+//level 3 - section 1 - string-interpolation
+function buildTopicElement(topic){
+  let title = `<h2>${topic.title}</h2>`;
+  let author = `<small>${topic.author}</small>`;
+  let body = `<p>${ topic.body}</p>`;
+
+  return { title, author, body };
+}
