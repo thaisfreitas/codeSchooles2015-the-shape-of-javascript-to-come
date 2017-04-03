@@ -36,3 +36,16 @@ class TagManager {
     API.deleteTag(tagName, this.topicId);
   }
 }
+
+// section 1  - subclassing
+
+class SidebarAdvertisement extends Advertisement {
+  constructor(title, link){
+     super(title, link);
+  }
+
+  _linkText(){
+    return "Sign up now!";
+  }
+
+}
