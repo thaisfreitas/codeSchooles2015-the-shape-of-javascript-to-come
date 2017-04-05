@@ -1,22 +1,22 @@
 //section 1 - implementing-a-method-on-a-class
 class TopicReplyCounter {
 
-  constructor(topicId, replies){
+  constructor(topicId, replies) {
     this.topicId = topicId;
     this.replies = replies || [];
     this.replyCount = this.replies.length;
   }
 
-  addReply(reply){
+  addReply(reply) {
     this.replies.push(reply);
     this.replyCount = this.totalReplies().length;
   }
 
-  totalReplies(){
-    return this.replies.filter( reply => !reply.isAbuse );
+  totalReplies() {
+    return this.replies.filter(reply => !reply.isAbuse);
   }
 
-  totalCount(){
+  totalCount() {
     return this.replyCount;
   }
 }
@@ -24,15 +24,15 @@ class TopicReplyCounter {
 
 class TagManager {
 
-  constructor (topicId){
+  constructor(topicId) {
     this.topicId = topicId;
   }
 
-  addTag(tagName){
+  addTag(tagName) {
     API.createTag(tagName, this.topicId);
   }
 
-  removeTag(tagName){
+  removeTag(tagName) {
     API.deleteTag(tagName, this.topicId);
   }
 }
@@ -40,12 +40,25 @@ class TagManager {
 // section 1  - subclassing
 
 class SidebarAdvertisement extends Advertisement {
-  constructor(title, link){
-     super(title, link);
+  constructor(title, link) {
+    super(title, link);
   }
 
-  _linkText(){
+  _linkText() {
     return "Sign up now!";
   }
 
 }
+
+//level 5 - section 2 - importing -modules
+import isTopicValid from './is-topic-valid.js';
+
+let topic = {
+  title: "ES2015",
+  author: {
+    name: "Sam",
+    isBlocked: false
+  }
+};
+
+isTopicValid(topic);
