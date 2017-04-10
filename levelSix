@@ -1,0 +1,16 @@
+//section 1 - writing promises
+export default function getReplies(topicId){
+  return new Promise(function(  ){
+    _getRepliesForTopic(topicId, function(data){
+      let replies = data.replies;
+      if(replies){
+        return new Promise(function(resolve, reject){
+          resolve(replies);
+        });
+      }else{
+        let error = new Error("An error occurred");
+
+      }
+    });
+  });
+}
