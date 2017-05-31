@@ -1,16 +1,26 @@
 //section 1 - writing promises
-export default function getReplies(topicId){
-  return new Promise(function(  ){
-    _getRepliesForTopic(topicId, function(data){
+export default function getReplies(topicId) {
+  return new Promise(function(resolve, reject) {
+    _getRepliesForTopic(topicId, function(data) {
       let replies = data.replies;
-      if(replies){
-        return new Promise(function(resolve, reject){
-          resolve(replies);
-        });
-      }else{
+      if (replies) {
+        resolve(replies);
+      } else {
         let error = new Error("An error occurred");
-
+        reject(error);
       }
     });
   });
 }
+
+//section 1 - catching erros from promises
+getReplies(1)
+  .then(function(replies) {
+    return replies.filter(reply => !reply.isAbuse);
+  })
+  .then(function(filteredReplies) {
+    console.log(filteredReplies);
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
